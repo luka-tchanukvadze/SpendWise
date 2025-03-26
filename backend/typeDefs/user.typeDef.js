@@ -31,6 +31,10 @@ const userTypeDef = `#graphql
   input LoginInput {
     message: String!
   }
+
+  type LogoutResponse {
+    message: String!
+  }
 `;
 
 export default userTypeDef;
