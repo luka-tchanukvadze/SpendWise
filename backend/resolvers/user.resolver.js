@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 
 const userResolver = {
   Mutation: {
-    signUp: async (_, { input }, context) => {
+    signUp: async (_, __, { input }, context) => {
       try {
         const { username, name, password, gender } = input;
 
@@ -41,7 +41,7 @@ const userResolver = {
       }
     },
 
-    login: async (_, { input }, context) => {
+    login: async (_, __, { input }, context) => {
       try {
         const { username, password } = input;
         const { user } = await context.authenticate("graphql-local", {
@@ -58,7 +58,21 @@ const userResolver = {
       }
     },
 
-    logout: as,
+    logout: async (_, __, context) => {
+      try {
+        await context.logout();
+        req.session.destroy((err) => {
+          if (err) throw err;
+        });
+
+        res.clearCookie("connect.sid");
+
+        return { message: "Logged out successfully" };
+      } catch (err) {
+        console.error("Error in logout: ", err);
+        throw new Error(err.message || "Internal server error");
+      }
+    },
   },
   Query: {
     users: (_, { req, res }) => {
