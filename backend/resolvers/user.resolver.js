@@ -96,5 +96,6 @@ const userResolver = {
     },
   },
 };
+// TODO => add user/transaction relation
 
 export default userResolver;
