@@ -1,3 +1,4 @@
+import _ from "lodash";
 import { users } from "../dummyData/data.js";
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
@@ -75,8 +76,14 @@ const userResolver = {
     },
   },
   Query: {
-    users: (_, { req, res }) => {
-      return users;
+    authUser: async (_, __, context) => {
+      try {
+        const user = await context.getUser();
+        return user;
+      } catch (err) {
+        console.error("Error in authUser: ", err);
+        throw new Error(err.message || "Internal server error");
+      }
     },
     user: (_, { userId }) => {
       return users.find((user) => user._id === userId);
