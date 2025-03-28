@@ -57,6 +57,8 @@ const userResolver = {
         throw new Error(err.message || "Internal server error");
       }
     },
+
+    logout: as,
   },
   Query: {
     users: (_, { req, res }) => {
