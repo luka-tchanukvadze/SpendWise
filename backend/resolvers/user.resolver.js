@@ -35,9 +35,26 @@ const userResolver = {
         await context.login(newUser);
 
         return newUser;
-      } catch (error) {
-        console.error("Error in signUp: ", error);
-        throw new Error(error.message || "Internal server error");
+      } catch (err) {
+        console.error("Error in signUp: ", err);
+        throw new Error(err.message || "Internal server error");
+      }
+    },
+
+    login: async (_, { input }, context) => {
+      try {
+        const { username, password } = input;
+        const { user } = await context.authenticate("graphql-local", {
+          username,
+          password,
+        });
+
+        await context.login(user);
+
+        return user;
+      } catch (err) {
+        console.error("Error in login: ", err);
+        throw new Error(err.message || "Internal server error");
       }
     },
   },
