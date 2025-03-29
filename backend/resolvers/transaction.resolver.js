@@ -26,6 +26,8 @@ const transactionResolver = {
         throw new Error("Error getting transaction");
       }
     },
+
+    // TODO => Add categorystatiscits query
   },
   Mutation: {},
 };
