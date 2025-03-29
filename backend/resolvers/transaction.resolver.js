@@ -45,7 +45,20 @@ const transactionResolver = {
       }
     },
 
-    updateTransaction: async (parent, argsToArgsConfig, context) => {},
+    updateTransaction: async (_, { input }) => {
+      try {
+        const updateTransaction = await Transaction.findByIdAndUpdate(
+          input.transactionId,
+          input,
+          { new: true }
+        );
+
+        return updateTransaction;
+      } catch (error) {
+        console.error("Error updating transaction", err);
+        throw new Error("Error updating transaction");
+      }
+    },
 
     deleteTransaction: async (parent, argsToArgsConfig, context) => {},
   },
