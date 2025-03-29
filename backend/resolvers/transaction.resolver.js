@@ -15,6 +15,17 @@ const transactionResolver = {
         throw new Error("Error getting transactions");
       }
     },
+
+    transaction: async (_, { transactionId }) => {
+      try {
+        const transaction = await Transaction.findById(transactionId);
+
+        return transaction;
+      } catch (err) {
+        console.error("Error getting transaction", err);
+        throw new Error("Error getting transaction");
+      }
+    },
   },
   Mutation: {},
 };
