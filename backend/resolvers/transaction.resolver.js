@@ -72,6 +72,8 @@ const transactionResolver = {
       }
     },
   },
+
+  // TODO => add transaction/user realationship
 };
 
 export default transactionResolver;
