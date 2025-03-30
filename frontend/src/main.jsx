@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App.jsx";
 
 import { BrowserRouter } from "react-router-dom";
-import GridBackground from "./components/GridBackground.jsx";
+import GridBackground from "./components/ui/GridBackground.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
