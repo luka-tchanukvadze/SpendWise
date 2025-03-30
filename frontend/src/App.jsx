@@ -1,7 +1,15 @@
+import { Route, Routes } from "react-router-dom";
+
 function App() {
   return (
     <>
-      <div className="text-red-600 p-8">hey</div>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/transaction/:id" element={<TransactionPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
     </>
   );
 }
