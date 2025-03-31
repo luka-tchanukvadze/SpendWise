@@ -12,6 +12,7 @@ function App() {
   return (
     <>
       {authUser && <Header />}
+
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
