@@ -18,6 +18,8 @@ const SignUpPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    console.log(signUpData);
     try {
       await signup({
         variables: {

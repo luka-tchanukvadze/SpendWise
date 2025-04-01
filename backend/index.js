@@ -70,9 +70,9 @@ app.use(
   }),
   express.json(),
   // expressMiddleware accepts the same arguments:
-  // an Apollor server instance and optional configuration options
+  // an Apollo Server instance and optional configuration options
   expressMiddleware(server, {
-    context: async ({ req, res }) => buildContext({ req }),
+    context: async ({ req, res }) => buildContext({ req, res }),
   })
 );
 

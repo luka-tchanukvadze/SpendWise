@@ -5,7 +5,7 @@ import bcrypt from "bcryptjs";
 
 const userResolver = {
   Mutation: {
-    signUp: async (_, __, { input }, context) => {
+    signUp: async (_, { input }, context) => {
       try {
         const { username, name, password, gender } = input;
 
