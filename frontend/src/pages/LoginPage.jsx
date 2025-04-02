@@ -3,6 +3,7 @@ import { useState } from "react";
 import InputField from "../components/InputField";
 import { useMutation } from "@apollo/client";
 import { LOGIN } from "../graphql/mutations/user.mutation";
+import toast from "react-hot-toast";
 
 const LoginPage = () => {
   const [loginData, setLoginData] = useState({
@@ -22,8 +23,18 @@ const LoginPage = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!loginData.username || !loginData.password)
+      return toast.error("Please fill in all fields");
+
+    try {
+      await login({ variables: { input: loginData } });
+    } catch (error) {
+      console.error("Error loggin in:", error);
+      toast.error(error.message);
+    }
   };
 
   return (
