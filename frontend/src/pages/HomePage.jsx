@@ -8,6 +8,10 @@ import { MdLogout } from "react-icons/md";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
+import { useMutation } from "@apollo/client";
+import { LOGOUT } from "../graphql/mutations/user.mutation";
+import toast from "react-hot-toast";
+
 const HomePage = () => {
   const chartData = {
     labels: ["Saving", "Expense", "Investment"],
@@ -33,11 +37,17 @@ const HomePage = () => {
     ],
   };
 
-  const handleLogout = () => {
-    console.log("Logging out...");
-  };
+  const [logout, { loading }] = useMutation(LOGOUT);
 
-  const loading = false;
+  const handleLogout = async () => {
+    try {
+      await logout();
+      // Clear the Apollot Client cache FROM THE DOCS
+    } catch (error) {
+      console.error("Error loggin out:", error);
+      toast.error(error.message);
+    }
+  };
 
   return (
     <>
