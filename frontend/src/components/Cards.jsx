@@ -8,6 +8,8 @@ const Cards = () => {
   if (error) return <p>Error: {error.message}</p>;
 
   console.log("data", data);
+
+  // TODO => add relations
   return (
     <div className="w-full px-10 min-h-[40vh]">
       <p className="text-5xl font-bold text-center my-10">History</p>
