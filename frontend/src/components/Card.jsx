@@ -6,6 +6,8 @@ import { FaTrash } from "react-icons/fa";
 import { HiPencilAlt } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { formatDate } from "../utils/formatDate";
+import { useMutation } from "@apollo/client";
+import { DELETE_TRANSACTION } from "../graphql/mutations/transaction.mutation";
 
 const categoryColorMap = {
   saving: "from-green-700 to-green-400",
@@ -21,8 +23,14 @@ const Card = ({ transaction }) => {
 
   description = description[0]?.toUpperCase() + description.slice(1);
   category = category[0]?.toUpperCase() + category.slice(1);
+  const [deleteTransaction, { loading }] = useMutation(DELETE_TRANSACTION);
 
   const formattedDate = formatDate(date);
+
+  const handleDelete = async () => {
+    try {
+    } catch (error) {}
+  };
 
   return (
     <div className={`rounded-md p-4 bg-gradient-to-br ${cardClass}`}>
@@ -30,7 +38,7 @@ const Card = ({ transaction }) => {
         <div className="flex flex-row items-center justify-between">
           <h2 className="text-lg font-bold text-white">{category}</h2>
           <div className="flex items-center gap-2">
-            <FaTrash className={"cursor-pointer"} />
+            <FaTrash className={"cursor-pointer"} onClick={handleDelete} />
             <Link to={`/transaction/123`}>
               <HiPencilAlt className="cursor-pointer" size={20} />
             </Link>
