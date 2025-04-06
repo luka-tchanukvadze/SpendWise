@@ -52,7 +52,7 @@ const Card = ({ transaction }) => {
               <FaTrash className={"cursor-pointer"} onClick={handleDelete} />
             )}
             {loading && (
-              <div className="w-6 h-6 border-t-2 mx-2 rounded-full animate-spin"></div>
+              <div className="w-6 h-6 border-t-2 rounded-full animate-spin"></div>
             )}
             <Link to={`/transaction/123`}>
               <HiPencilAlt className="cursor-pointer" size={20} />
