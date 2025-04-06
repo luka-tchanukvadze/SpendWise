@@ -14,8 +14,6 @@ const categoryColorMap = {
   // Add more categories and corresponding color classes as needed
 };
 
-// TODO =>
-
 const Card = ({ transaction }) => {
   let { category, amount, location, date, paymentType, description } =
     transaction;

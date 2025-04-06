@@ -4,8 +4,12 @@ import { CREATE_TRANSACTION } from "../graphql/mutations/transaction.mutation";
 
 const TransactionForm = () => {
   // TODO => Refetch once you create transaction
-  const [createTransaction, { loading, error }] =
-    useMutation(CREATE_TRANSACTION);
+  const [createTransaction, { loading, error }] = useMutation(
+    CREATE_TRANSACTION,
+    {
+      refetchQueries: ["GetTransactions"],
+    }
+  );
 
   const handleSubmit = async (e) => {
     e.preventDefault();
