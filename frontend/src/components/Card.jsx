@@ -23,7 +23,9 @@ const Card = ({ transaction }) => {
 
   description = description[0]?.toUpperCase() + description.slice(1);
   category = category[0]?.toUpperCase() + category.slice(1);
-  const [deleteTransaction, { loading }] = useMutation(DELETE_TRANSACTION);
+  const [deleteTransaction, { loading }] = useMutation(DELETE_TRANSACTION, {
+    refetchQueries: ["GetTransactions"],
+  });
 
   const formattedDate = formatDate(date);
 
