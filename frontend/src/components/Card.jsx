@@ -54,7 +54,7 @@ const Card = ({ transaction }) => {
             {loading && (
               <div className="w-6 h-6 border-t-2 rounded-full animate-spin"></div>
             )}
-            <Link to={`/transaction/123`}>
+            <Link to={`/transaction/${transaction._id}`}>
               <HiPencilAlt className="cursor-pointer" size={20} />
             </Link>
           </div>
