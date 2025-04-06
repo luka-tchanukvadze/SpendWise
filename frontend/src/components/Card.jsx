@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { formatDate } from "../utils/formatDate";
 import { useMutation } from "@apollo/client";
 import { DELETE_TRANSACTION } from "../graphql/mutations/transaction.mutation";
+import toast from "react-hot-toast";
 
 const categoryColorMap = {
   saving: "from-green-700 to-green-400",
@@ -31,7 +32,14 @@ const Card = ({ transaction }) => {
 
   const handleDelete = async () => {
     try {
-    } catch (error) {}
+      await deleteTransaction({
+        variables: { transactionId: transaction._id },
+      });
+      toast.success("Transaction deleted successfully");
+    } catch (error) {
+      console.error("Error deleting transaction:", error);
+      toast.error(error.message);
+    }
   };
 
   return (
