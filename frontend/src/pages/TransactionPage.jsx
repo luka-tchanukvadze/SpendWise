@@ -1,8 +1,15 @@
+import { useQuery } from "@apollo/client";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import { GET_TRANSACTION } from "../graphql/queries/transaction.query";
 
 const TransactionPage = () => {
   const { id } = useParams();
+  const { loading, data } = useQuery(GET_TRANSACTION, {
+    variables: { id: id },
+  });
+
+  console.log(data);
 
   const [formData, setFormData] = useState({
     description: "",
