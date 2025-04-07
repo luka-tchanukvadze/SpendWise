@@ -9,8 +9,6 @@ const TransactionPage = () => {
     variables: { id: id },
   });
 
-  console.log(data);
-
   const [formData, setFormData] = useState({
     description: data?.transaction?.description || "",
     paymentType: data?.transaction?.paymentType || "",
