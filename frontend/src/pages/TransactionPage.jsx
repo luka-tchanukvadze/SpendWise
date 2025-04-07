@@ -1,7 +1,11 @@
 import { useState } from "react";
 import TransactionFormSkeleton from "../components/skeletons/TransactionFormSkeleton";
+import { useParams } from "react-router-dom";
 
 const TransactionPage = () => {
+  const { id } = useParams();
+  console.log("id", id);
+
   const [formData, setFormData] = useState({
     description: "",
     paymentType: "",
