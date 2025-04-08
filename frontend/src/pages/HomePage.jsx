@@ -44,7 +44,8 @@ const HomePage = () => {
   const handleLogout = async () => {
     try {
       await logout();
-      // Clear the Apollot Client cache FROM THE DOCS
+      // Clear the Apollot Client cache
+      client.resetStore();
     } catch (error) {
       console.error("Error loggin out:", error);
       toast.error(error.message);
