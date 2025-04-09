@@ -8,9 +8,10 @@ import { MdLogout } from "react-icons/md";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { LOGOUT } from "../graphql/mutations/user.mutation";
 import toast from "react-hot-toast";
+import { GET_TRANSACTION_STATISTICS } from "../graphql/queries/transaction.query";
 
 const HomePage = () => {
   const chartData = {
@@ -40,6 +41,10 @@ const HomePage = () => {
   const [logout, { loading }] = useMutation(LOGOUT, {
     refetchQueries: ["GetAuthenticatedUser"],
   });
+
+  const { data } = useQuery(GET_TRANSACTION_STATISTICS);
+
+  console.log("category statistics", data);
 
   const handleLogout = async () => {
     try {
