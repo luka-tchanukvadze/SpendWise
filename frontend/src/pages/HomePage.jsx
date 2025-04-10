@@ -12,7 +12,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { LOGOUT } from "../graphql/mutations/user.mutation";
 import toast from "react-hot-toast";
 import { GET_TRANSACTION_STATISTICS } from "../graphql/queries/transaction.query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // const chartData = {
 //   labels: ["Saving", "Expense", "Investment"],
@@ -39,13 +39,13 @@ import { useState } from "react";
 // };
 
 const HomePage = () => {
+  const { data } = useQuery(GET_TRANSACTION_STATISTICS);
+
   const [logout, { loading }] = useMutation(LOGOUT, {
     refetchQueries: ["GetAuthenticatedUser"],
   });
 
-  const { data } = useQuery(GET_TRANSACTION_STATISTICS);
-
-  const chartData = useState({
+  const [chartData, setChartData] = useState({
     labels: [],
     datasets: [
       {
@@ -61,7 +61,42 @@ const HomePage = () => {
     ],
   });
 
-  console.log("category statistics", data);
+  useEffect(() => {
+    if (data?.categoryStatistics) {
+      const categories = data.categoryStatistics.map((stat) => stat.category);
+      const totalAmounts = data.categoryStatistics.map(
+        (stat) => stat.totalAmount
+      );
+
+      const backgroundColors = [];
+      const borderColors = [];
+
+      categories.forEach((category) => {
+        if (category === "saving") {
+          backgroundColors.push("rgba(75, 192, 192)");
+          borderColors.push("rgba(75, 192, 192)");
+        } else if (category === "expense") {
+          backgroundColors.push("rgba(255, 99, 132)");
+          borderColors.push("rgba(255, 99, 132)");
+        } else if (category === "investment") {
+          backgroundColors.push("rgba(54, 162, 235)");
+          borderColors.push("rgba(54, 162, 235)");
+        }
+      });
+
+      setChartData((prev) => ({
+        labels: categories,
+        datasets: [
+          {
+            ...prev.datasets[0],
+            data: totalAmounts,
+            backgroundColor: backgroundColors,
+            borderColor: borderColors,
+          },
+        ],
+      }));
+    }
+  }, [data]);
 
   const handleLogout = async () => {
     try {
