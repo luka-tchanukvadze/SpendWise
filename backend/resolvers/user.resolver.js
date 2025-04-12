@@ -98,20 +98,17 @@ const userResolver = {
     },
   },
 
-  User:{
-    transactions: async(parent) => {
+  User: {
+    transactions: async (parent) => {
       try {
-        const transactions = await Transaction.find({user:parent._id})
-        return transactions
-        
+        const transactions = await Transaction.find({ userId: parent._id });
+        return transactions;
       } catch (err) {
-        console.log('Error in user.transactions resolver: ', err)
-        throw new Error(err.message || "Internal server error")
+        console.log("Error in user.transactions resolver: ", err);
+        throw new Error(err.message || "Internal server error");
       }
-    }
-  }
-  
+    },
+  },
 };
-
 
 export default userResolver;
