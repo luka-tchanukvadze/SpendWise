@@ -10,7 +10,6 @@ import { UPDATE_TRANSACTION } from "../graphql/mutations/transaction.mutation";
 
 import { toast } from "react-hot-toast";
 import TransactionFormSkeleton from "../components/skeletons/TransactionFormSkeleton";
-import { query } from "express";
 
 const TransactionPage = () => {
   const { id } = useParams();
