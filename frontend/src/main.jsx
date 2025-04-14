@@ -9,7 +9,6 @@ import GridBackground from "./components/ui/GridBackground.jsx";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
 const client = new ApolloClient({
-  // TODO => Update the uri on production
   uri:
     import.meta.env.VITE_NODE_ENV === "development"
       ? "http://localhost:4000/graphql"
